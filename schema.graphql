@@ -1,0 +1,45 @@
+type Query {
+  getFeedback(type: String!, date: String!): feedback
+  listFeedbacks(
+    filter: TableFeedbackFilterInput
+    limit: Int
+    nextToken: String
+  ): feedbackConnection
+}
+
+type feedback {
+  date: String!
+  type: String!
+  email: String
+  message: String
+  name: String
+  rating: String
+}
+
+input TableFeedbackFilterInput {
+  date: TableStringFilterInput
+  type: TableStringFilterInput
+  email: TableStringFilterInput
+  message: TableStringFilterInput
+  name: TableStringFilterInput
+  rating: TableStringFilterInput
+}
+
+input TableStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+}
+
+type feedbackConnection {
+  items: [feedback]
+  nextToken: String
+}
